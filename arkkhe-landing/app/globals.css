@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #000000;
+  --color-bone: #d1d1d1;
+  --color-hairline: #2a2a2a;
+  --color-dim: #929292;
+
+  --font-display: "Surgena", var(--font-archivo), ui-sans-serif, sans-serif;
+  --font-sans: "Hind", var(--font-hind), ui-sans-serif, system-ui, sans-serif;
+  --font-techno: "SK Cuber Expanded Trial", var(--font-orbitron), ui-monospace, monospace;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root { --u: calc(100vw / 1920); }
+@media (min-width: 2100px) { :root { --u: 1.09375px; } }
+@media (max-width: 1023px) { :root { --u: 0.53333px; } }
+
+html { overflow-x: clip; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--color-bone); color: var(--color-ink); }
+
+@layer components {
+  .stage {
+    container-type: inline-size;
+    --u: calc(100cqw / 1920);
+    max-width: 2100px;
+    margin-inline: auto;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 0.73;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .display-slash { font-weight: 700; opacity: 0.2; }
+
+  .techno {
+    font-family: var(--font-techno);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 1.25em 2em;
+    line-height: 1.4;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition:
+      background-color 0.4s var(--ease-soft),
+      color 0.4s var(--ease-soft),
+      border-color 0.4s var(--ease-soft),
+      opacity 0.4s var(--ease-soft);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--color-bone);
+    padding: 1.143em 1.429em;
+    line-height: 1.4;
+    font-weight: 500;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: var(--chip-o, 1);
+    transition:
+      opacity 0.4s var(--ease-soft),
+      background-color 0.4s var(--ease-soft);
+  }
+
+  .chip:hover,
+  .chip:focus-visible,
+  .chip[aria-pressed="true"] { opacity: 1; }
+
+  .chip[aria-pressed="true"] {
+    background-color: color-mix(in srgb, var(--color-bone) 12%, transparent);
+  }
+}
+
+section[id], footer[id] { scroll-margin-top: calc(var(--u) * 120); }
+
+:focus-visible { outline: 1px solid var(--color-bone); outline-offset: 4px; }
